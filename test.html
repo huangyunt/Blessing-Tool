@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孔明灯效果</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+
+    <script>
+        // 获取canvas元素和绘图上下文
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 绘制孔明灯主体（简单示意为一个椭圆加一个矩形作为灯罩和灯体部分）
+        function drawLantern() {
+            // 绘制灯罩（椭圆）
+            ctx.beginPath();
+            ctx.ellipse(200, 150, 100, 60, 0, 0, 2 * Math.PI);
+            ctx.fillStyle ='red';
+            ctx.fill();
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // 绘制灯体（矩形）
+            ctx.beginPath();
+            ctx.rect(150, 150, 100, 150);
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        // 绘制火焰（简单用几个三角形组合示意动态效果）
+        function drawFlame() {
+            const flameColors = ['orange', 'yellow', 'red'];
+            const numTriangles = 3;
+            const baseX = 200;
+            const baseY = 200;
+            const triangleWidth = 20;
+            const triangleHeight = 30;
+            for (let i = 0; i < numTriangles; i++) {
+                ctx.beginPath();
+                ctx.moveTo(baseX, baseY);
+                ctx.lineTo(baseX + triangleWidth * (i % 2 === 0? 1 : -1), baseY + triangleHeight);
+                ctx.lineTo(baseX - triangleWidth * (i % 2 === 0? 1 : -1), baseY + triangleHeight);
+                ctx.closePath();
+                ctx.fillStyle = flameColors[Math.floor(Math.random() * flameColors.length)];
+                ctx.fill();
+            }
+        }
+
+        // 主函数，调用绘制函数
+        function main() {
+            drawLantern();
+            drawFlame();
+        }
+
+        main();
+    </script>
+</body>
+
+</html>
