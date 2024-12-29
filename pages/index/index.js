@@ -9,6 +9,7 @@ Page({
         tt.getLiveRoomCardInfo({
             success(res) {
                 console.log('调用成功：', res.liveCardMaxWidth, res.liveCardMaxHeight);
+                console.log('liveCard: ', res.liveCardMaxWidth, res.liveCardMaxHeight)
                 // 启动玩法
                 tt.createLiveCard({
                     url: '/live-card/game',

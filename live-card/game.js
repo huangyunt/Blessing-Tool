@@ -1,22 +1,22 @@
 Card({
-    draw(openData) {
-        // const textArea = {
-        //     x: 0,
-        //     y: 0,
-        //     width: canvas.width,
-        //     height: canvas.height * 0.3
-        // }; 
+    // draw(openData) {
+    //     // const textArea = {
+    //     //     x: 0,
+    //     //     y: 0,
+    //     //     width: canvas.width,
+    //     //     height: canvas.height * 0.3
+    //     // }; 
 
-        // ctx.clearRect(textArea.x, textArea.y, textArea.width, textArea.height);
+    //     // ctx.clearRect(textArea.x, textArea.y, textArea.width, textArea.height);
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0)";
-        // ctx.fillRect(textArea.x, textArea.y, textArea.width, textArea.height);
+    //     ctx.fillStyle = "rgba(255, 255, 255, 0)";
+    //     // ctx.fillRect(textArea.x, textArea.y, textArea.width, textArea.height);
 
-        ctx.font = '16px serif';
+    //     ctx.font = '16px serif';
 
-        // ctx.textAlign = 'left';  // 设置文本对齐方式为左对齐
-        // ctx.fillText(openData, textArea.x, textArea.y + textArea.height / 1.5);
-    },
+    //     // ctx.textAlign = 'left';  // 设置文本对齐方式为左对齐
+    //     // ctx.fillText(openData, textArea.x, textArea.y + textArea.height / 1.5);
+    // },
 
     created: function(options) {
         const canvas = this.getCanvas();
@@ -24,118 +24,121 @@ Card({
         console.log("canvas: ", canvas)
         const ctx = canvas.getContext('2d');
 
+        const textArea = {
+            x: 0,
+            y: 0,
+            width: canvas.width,
+            height: canvas.height * 0.3
+          };
+      
+      
+          ctx.clearRect(textArea.x, textArea.y, textArea.width, textArea.height);
+      
+      
+          ctx.fillStyle = "rgba(36, 255, 255, 0.5)";
+          ctx.fillRect(textArea.x, textArea.y, textArea.width, textArea.height);
+      
+      
+          ctx.font = '16px serif';
+          ctx.fillStyle = 'black';
+
+
+        // // 绘制白色大正方形（填充整个canvas区域作为背景大正方形）
+        // ctx.fillStyle = "rgba(255, 99, 88, 1)";
+        // ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 启动动画
+        // update();
+
         // const img = new Image();
-        // img.src = '/live-card/placeholder.png'; 
+        // img.src = '/live-card/light2.png'; 
         // img.onload = function () {
         //   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         // };
 
+        console.log("canvas: ", canvas.width, canvas.height)
+        // 加载孔明灯图片
+        const kongmingdengImage = new Image();
+        kongmingdengImage.src = '/live-card/kmd.gif';
 
-        // // 绘制白色大正方形（填充整个canvas区域作为背景大正方形）
-        // ctx.fillStyle = "rgba(255, 255, 255, 0)";
-        // ctx.fillRect(0, 0, canvas.width, canvas.height);
-        // console.log('cccc: ', canvas.width, canvas.height)
-
-        // 孔明灯主体颜色
-        const lanternColor = '#FFE4B5';
-        // 孔明灯框架颜色
-        const frameColor = '#8B4513';
-        // 火焰颜色数组，增加更多颜色变化
-        const flameColors = ['#FFA500', '#FFD700', '#FF4500', '#FF6347', '#FF7F50'];
-        // 孔明灯初始位置
-        let lanternX = canvas.width / 2;
-        let lanternY = canvas.height / 2;
-        // 上升速度
-        const riseSpeed = 1;
-        // 火焰飘动幅度
-        const flameSwayAmplitude = 3;
-        const flameSwaySpeed = 0.08;
-        // 火焰闪烁频率和幅度
-        const flameFlickerFrequency = 0.05;
-        const flameFlickerAmplitude = 8;
-
-        // 绘制孔明灯主体
-        function drawLantern() {
-            // 绘制灯罩（椭圆）
-            ctx.beginPath();
-            ctx.ellipse(lanternX, lanternY - 30, 40, 20, 0, 0, 2 * Math.PI);
-            ctx.fillStyle = lanternColor;
-            ctx.fill();
-            ctx.strokeStyle = frameColor;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            // 绘制灯体（更细致的梯形）
-            ctx.beginPath();
-            ctx.moveTo(lanternX - 20, lanternY - 30);
-            ctx.lineTo(lanternX - 15, lanternY + 40);
-            ctx.lineTo(lanternX + 15, lanternY + 40);
-            ctx.lineTo(lanternX + 20, lanternY - 30);
-            ctx.closePath();
-            ctx.fillStyle = lanternColor;
-            ctx.fill();
-            ctx.strokeStyle = frameColor;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            // 绘制孔明灯顶部装饰（多条线条）
-            ctx.beginPath();
-            ctx.moveTo(lanternX - 8, lanternY - 50);
-            ctx.lineTo(lanternX + 8, lanternY - 50);
-            ctx.strokeStyle = frameColor;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(lanternX - 6, lanternY - 48);
-            ctx.lineTo(lanternX + 6, lanternY - 48);
-            ctx.strokeStyle = frameColor;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(lanternX - 4, lanternY - 46);
-            ctx.lineTo(lanternX + 4, lanternY - 46);
-            ctx.strokeStyle = frameColor;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+        // 定义孔明灯对象的构造函数
+        function Kongmingdeng(x, y, speed, scale) {
+            this.x = x;
+            this.y = y;
+            this.speed = speed;
+            this.scale = scale; // 新增属性，用于控制图片缩放比例
         }
 
-        // 绘制火焰
-        function drawFlame() {
-            const numTriangles = 6;
-            const baseWidth = 10;
-            const baseHeight = 15;
-            const flameBaseX = lanternX;
-            const flameBaseY = lanternY - 15;
-            const swayOffset = Math.sin(Date.now() * flameSwaySpeed) * flameSwayAmplitude;
-            for (let i = 0; i < numTriangles; i++) {
-                ctx.beginPath();
-                ctx.moveTo(flameBaseX + swayOffset, flameBaseY);
-                ctx.lineTo(flameBaseX + baseWidth * (i % 2 === 0 ? 1 : -1) + swayOffset, flameBaseY + baseHeight * (i + 1));
-                ctx.lineTo(flameBaseX - baseWidth * (i % 2 === 0 ? 1 : -1) + swayOffset, flameBaseY + baseHeight * (i + 1));
-                ctx.closePath();
-                const flickerFactor = 1 + Math.sin(Date.now() * flameFlickerFrequency) * flameFlickerAmplitude;
-                ctx.fillStyle = flameColors[Math.floor(Math.random() * flameColors.length)];
-                ctx.fill();
+        // 存储多个孔明灯实例的数组
+        const kongmingdengs = [];
+
+        // 根据移动端屏幕尺寸创建几个孔明灯实例并添加到数组中，可根据需要调整参数
+        kongmingdengs.push(new Kongmingdeng(50, 100, 0.1, 0.4));
+        kongmingdengs.push(new Kongmingdeng(100, 150, 0.2, 0.25));
+        kongmingdengs.push(new Kongmingdeng(150, 80, 0.2, 0.3));
+        kongmingdengs.push(new Kongmingdeng(200, 100, 0.2, 0.2));
+        kongmingdengs.push(new Kongmingdeng(250, 80, 0.2, 0.2));
+        kongmingdengs.push(new Kongmingdeng(300, 90, 0.2, 0.2));
+
+        // 定义一个最小安全距离（根据孔明灯图片大小等因素合理调整）
+        const minDistance = 30;
+
+        const checkCollision = (kongmingdeng1, kongmingdeng2) => {
+            const dx = kongmingdeng1.x - kongmingdeng2.x;
+            const dy = kongmingdeng1.y - kongmingdeng2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            return distance < minDistance;
+        }
+
+        const adjustPosition = (kongmingdeng, otherKongmingdengs) => {
+            for (const otherKongmingdeng of otherKongmingdengs) {
+                if (otherKongmingdeng !== kongmingdeng && checkCollision(kongmingdeng, otherKongmingdeng)) {
+                    // 简单的调整策略：水平方向上往远离对方的方向移动一点
+                    if (kongmingdeng.x < otherKongmingdeng.x) {
+                        kongmingdeng.x -= 5;
+                    } else {
+                        kongmingdeng.x += 5;
+                    }
+                    // 垂直方向同理
+                    if (kongmingdeng.y < otherKongmingdeng.y) {
+                        kongmingdeng.y -= 5;
+                    } else {
+                        kongmingdeng.y += 5;
+                    }
+                }
             }
         }
 
-        // 动画更新函数，用于模拟上升和火焰飘动效果
-        function update() {
+
+        function draw() {
+            // 清空画布
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            lanternY -= riseSpeed;
-            drawLantern();
-            drawFlame();
-            if (lanternY < -50) {
-                // 当孔明灯上升超出画布一定范围，重置位置
-                lanternY = canvas.height + 50;
+
+            // 遍历每个孔明灯实例并绘制和更新位置
+            for (const kongmingdeng of kongmingdengs) {
+                // 绘制孔明灯图片，并根据缩放比例缩放
+                ctx.drawImage(kongmingdengImage, kongmingdeng.x, kongmingdeng.y, kongmingdengImage.width * kongmingdeng.scale, kongmingdengImage.height * kongmingdeng.scale);
+
+                // 更新孔明灯的纵坐标，实现上升效果（简单模拟）
+                kongmingdeng.y -= kongmingdeng.speed;
+
+                // 检查并调整位置避免碰撞和重叠
+                adjustPosition(kongmingdeng, kongmingdengs);
+
+                // 如果孔明灯超出画布顶部，重置到画布底部附近（可更灵活处理）
+                if (kongmingdeng.y < -50) {
+                    kongmingdeng.y = canvas.height + Math.random() * 100;
+                }
             }
-            requestAnimationFrame(update);
+
+            requestAnimationFrame(draw);
         }
 
-        // 启动动画
-        update();
+        // 等待图片加载完成后开始绘制动画
+        kongmingdengImage.onload = function() {
+            draw();
+        };
     }
-
 })
 
 let canvas, ctx;
