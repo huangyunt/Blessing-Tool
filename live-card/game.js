@@ -132,8 +132,13 @@ Card({
             // 清空画布
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = 'rgba(255, 255, 255, 0)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // ctx.fillStyle = 'rgba(255, 255, 255, 0)';
+            // ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // canvas.style.backgroundColor = 'transparent';
+
+            // 方式二：在绘图上下文层面清除画布（如果之前有绘制操作留下背景的话）
+            // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
             // ctx.fillStyle = 'rgba(0, 0, 0, 1)';
 
             // 遍历每个孔明灯实例并绘制和更新位置
