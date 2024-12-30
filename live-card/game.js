@@ -1,9 +1,14 @@
 Card({
-
     created: function(options) {
+        console.log("玩法卡片创建完成")
+    },
+
+    onPageMessage: function(message) {
+        console.log(`玩法卡片收到消息：${message}`); // 接收数据做逻辑处理
         const canvas = this.getCanvas();
         const ctx = canvas.getContext('2d');
 
+        console.log('this: ', this)
         canvas.width = 440;
         canvas.height = 661
 
@@ -31,7 +36,7 @@ Card({
             // 判断选中的元素是哪一个
             kongmingdengs.forEach((kongmingdeng, index) => {
                 const isPointInImage = () => {
-                    debugger;
+                    // debugger;
                     return (clickCoordinate.x >= kongmingdeng.x &&
                             clickCoordinate.x <= kongmingdeng.x + kongmingdeng.width) &&
                         clickCoordinate.y >= kongmingdeng.y &&
@@ -136,8 +141,18 @@ Card({
                 if (kongmingdeng.isClicked) {
                     // ctx.font = "48px serif";
                     // ctx.fillText("Hello world", kongmingdeng.x, kongmingdeng.y);
-                    ctx.fillStyle = 'blue';
-                    ctx.fillRect(kongmingdeng.x, kongmingdeng.y, 50, 50);
+                    // ctx.fillStyle = 'blue';
+                    // ctx.fillRect(kongmingdeng.x, kongmingdeng.y, 50, 50);
+
+                    // 设置文字样式
+                    ctx.font = "20px Arial"; // 设置字体为Arial，字号为20px
+                    ctx.fillStyle = "black"; // 设置文字填充颜色为黑色
+                    ctx.textAlign = "center"; // 设置文字水平对齐方式为居中
+                    ctx.textBaseline = "middle"; // 设置文字垂直对齐方式为居中
+
+                    // 在canvas上绘制文字
+                    const text = "Hello, Canvas!"; // 要绘制的文字内容
+                    ctx.fillText(text, kongmingdeng.x, kongmingdeng.y); // 使用fillText方法绘制文字
                 } else {
                     // 绘制孔明灯图片，并根据缩放比例缩放
                     ctx.drawImage(kongmingdengImage, kongmingdeng.x, kongmingdeng.y, kongmingdengImage.width * kongmingdeng.scale, kongmingdengImage.height * kongmingdeng.scale);

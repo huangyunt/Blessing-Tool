@@ -1,3 +1,13 @@
-<view class="container">
-    <image src="/assets/imgs/empty.png" class="placeholder"></image>
+<view class="intro">
+    <button class="btn" bindtap="createLiveCard">创建玩法卡片</button>
+    <button class="btn" bindtap="exitLiveCard">关闭玩法卡片</button>
+    <!-- <button class="btn" bindtap="jumpAIAPI">测试 AI 歌词识别需求</button>
+    <button class="btn" bindtap="createLiveCard">创建挂件（300 * 300）</button>
+    <button class="btn" bindtap="createLiveCardMax">创建挂件（最大宽高）</button>
+    <button class="btn" bindtap="createLiveCardMaxx">创建挂件（超出最大宽高，报错！）</button>
+    <button class="btn" bindtap="hideLiveCard">隐藏挂件</button>
+    <button class="btn" bindtap="showLiveCard">展示挂件</button>
+    <button class="btn" bindtap="updateLiveCard">更新挂件（50 * 50）</button>
+    <button class="btn" bindtap="updateLiveCardMax">更新挂件（最大宽高）</button>
+    <button class="btn" bindtap="updateLiveCardMaxx">更新挂件（超出最大宽高，报错！）</button> -->
 </view>
