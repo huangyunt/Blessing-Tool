@@ -1,7 +1,15 @@
 const app = getApp()
 
 Page({
-    data: {},
+    data: {
+        pageCardContext: null
+    },
+    updateLiveCardSize: function() {
+        this.data.pageCardContext.updateSize({
+            width: 50,
+            height: 50
+        });
+    },
     onLoad() {
         // Do some initialize when page load.
         // this.updateText('onLoad 页面加载');
@@ -20,6 +28,10 @@ Page({
                         errMsg
                     }) => {
                         console.info('Card created!', cardContext, errMsg);
+                        cardContext.updateSize({
+                            width: res.liveCardMaxWidth, // 卡片宽度，建议设置一个小于最大宽度的值
+                            height: res.liveCardMaxHeight,
+                        })
                     },
                     fail: ({
                         errMsg
